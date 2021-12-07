@@ -1,0 +1,29 @@
+.table-custom {
+    background-color: aliceblue;
+}
+
+button.delete_accept {
+    background-color: #fff;
+}
+
+.delete_accept {
+    color: #ff3729;
+    border: none;
+}
+
+.delete_accept:hover {
+    color: #c20d00;
+}
+
+button.delete_soft {
+    background-color: #fff;
+}
+
+.delete_soft {
+    color: #ff3729;
+    border: none;
+}
+
+.delete_soft:hover {
+    color: #c20d00;
+}
