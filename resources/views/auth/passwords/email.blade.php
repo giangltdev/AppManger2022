@@ -1,47 +1,54 @@
 @extends('layouts.app')
 
+@section('title','Apogroup - Quên mật khẩu')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<!--begin::Wrapper-->
+<div class="d-flex flex-row-fluid flex-center">
+    <!--begin::Forgot-->
+    <div class="login-form">
+        <!--begin::Form-->
+        <form class="form" id="kt_login_forgot_form" method="POST" action="{{ route('password.email') }}">
+            @csrf
+            <!--begin::Title-->
+            <div class="pb-5 pb-lg-15">
+                <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Quên mật khẩu?</h3>
+                <p class="text-muted font-weight-bold font-size-h4">Bạn vui lòng nhập mật email để lấy lại mật khẩu</p>
             </div>
-        </div>
+            <!--end::Title-->
+            {{-- Notification success email fogot password --}}
+            @if (session('status'))
+                <div class="alert alert-success alert-dismissible fade show mt-5 ml-2 mr-2" role="alert">
+                    {{ session('status') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+        {{-- End notification success email fogot password --}}
+            <!--begin::Form group-->
+            <div class="form-group">
+                <input class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Nhập email của bạn" autocomplete="off" />
+            </div>
+            <!--end::Form group-->
+            @if($errors->has('email'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$errors->first('email')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            <!--begin::Form group-->
+            <div class="form-group d-flex flex-wrap">
+                <button type="submit" id="kt_login_forgot_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Hoàn thành</button>
+                <a href="{{ route('login') }}" id="kt_login_forgot_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">trở lại</a>
+            </div>
+            <!--end::Form group-->
+        </form>
+        <!--end::Form-->
     </div>
+    <!--end::Forgot-->
 </div>
+<!--end::Wrapper-->
 @endsection

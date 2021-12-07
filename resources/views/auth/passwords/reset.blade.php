@@ -1,65 +1,72 @@
 @extends('layouts.app')
 
+@section('title','Apogroup - Đổi mật khẩu')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<!--begin::Wrapper-->
+<div class="d-flex flex-row-fluid flex-center">
+    <!--begin::Signin-->
+    <div class="login-form">
+        <!--begin::Form-->
+        <form class="form" id="kt_login_singup_form" method="POST" action="{{ route('password.update') }}">
+            @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
+            <!--begin::Title-->
+            <div class="pb-5 pb-lg-15">
+                <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Lấy lại mật khẩu</h3>
             </div>
-        </div>
+            <!--begin::Title-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+                <input class="form-control h-auto py-7 px-6 rounded-lg border-0 @error('email')
+                is-invalid @enderror" type="email" name="email" id="email" value="{{ $email ?? old('email') }}"
+                placeholder="Nhập email của bạn"required autocomplete="email" autofocus />
+            </div>
+            @if($errors->has('email'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$errors->first('email')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <div class="d-flex justify-content-between mt-n5">
+                    <label class="font-size-h6 font-weight-bolder text-dark pt-5">Mật khẩu</label>
+                </div>
+                <input class="form-control h-auto py-7 px-6 rounded-lg border-0 @error('password') is-invalid @enderror"
+                type="password" name="password" id="password" placeholder="Nhập mật khẩu của bạn"
+                required autocomplete="new-password" autofocus />
+            </div>
+            @if($errors->has('password'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$errors->first('password')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <div class="d-flex justify-content-between mt-n5">
+                    <label class="font-size-h6 font-weight-bolder text-dark pt-5">Xác nhận mật khẩu</label>
+                </div>
+                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" name="password_confirmation" id="password-confirm" placeholder="Nhập lại mật khẩu của bạn" required autocomplete="new-password" autofocus />
+            </div>
+            <!--end::Form group-->
+            <!--begin::Action-->
+            <div class="pb-lg-0 pb-5">
+                <button type="submit" id="kt_login_singup_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Hoàn tất</button>
+            </div>
+            <!--end::Action-->
+        </form>
+        <!--end::Form-->
     </div>
+    <!--end::Signin-->
 </div>
+<!--end::Wrapper-->
 @endsection
