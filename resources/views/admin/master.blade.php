@@ -55,7 +55,7 @@
     @include('admin._share.extensions')
     <!--end::Extentions-->
 
-    <!-- JS -->
+    < <!-- JS -->
     @include('admin._share.script')
     @yield('local-script')
 </body>

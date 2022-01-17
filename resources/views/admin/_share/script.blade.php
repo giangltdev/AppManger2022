@@ -1,13 +1,10 @@
 <!--begin::jquery js-->
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <!--begin::toastr js-->
-<script src="https://cdn.tiny.cloud/1/020jjbdt3p0sx28fd750ixmot3422dv000qbfxc5h2vgap15/tinymce/5/tinymce.min.js"
-    referrerpolicy="origin"></script>
 <!--begin::jquery js-->
 <script src="{{ asset('assets/js/popper.js') }}"></script>
 <!--end::Page Scripts-->
 <script src="{{ asset('js/toastr.min.js') }}"></script>
-
 
 <!--begin::Global Theme Bundle(used by all pages)-->
 <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
@@ -31,7 +28,6 @@
 <!--end::Page Scripts-->
 @yield('script')
 <!-- end: add script -->
-
 <!--end::Page Scripts-->
 <script>
 $('.delete_accept').click(function(event) {
