@@ -8,8 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\ResetPasswordNotification;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -30,6 +32,9 @@ class User extends Authenticatable
         'address',
         'phone',
         'is_active',
+        'department',
+        'rank',
+        'team'
     ];
 
     /**
@@ -59,4 +64,9 @@ class User extends Authenticatable
              $query->orWhere($colum, 'like', "%$keyWord%");
          }
      }
+
+     public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 }

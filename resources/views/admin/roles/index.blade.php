@@ -7,8 +7,8 @@
     <div class="card card-custom pb-5">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">Người dùng
-                    <span class="text-muted pt-2 font-size-sm d-block">Danh sách dữ liệu người dùng cập nhật</span>
+                <h3 class="card-label">Quyền truy cập
+                    <span class="text-muted pt-2 font-size-sm d-block">Danh sách quyền được cập nhật</span>
                 </h3>
             </div>
             <div class="card-toolbar">

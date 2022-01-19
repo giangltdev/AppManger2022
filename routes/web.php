@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PersonnelController;
+use App\Http\Controllers\Admin\OderController;
 
 
 /*
@@ -21,6 +23,7 @@ use App\Http\Controllers\Admin\RoleController;
 
 
 Auth::routes();
+Auth::routes(['verify' => true]);
 
 
 Route::middleware('activeLoginUser')->prefix('admin')->group(function () {
@@ -46,4 +49,11 @@ Route::middleware('activeLoginUser')->prefix('admin')->group(function () {
         Route::post('/sua-quyen/{id}', [RoleController::class, 'updatePer'])->name('roles.updatePer');
         Route::get('/du-lieu', [RoleController::class, 'fetch_data'])->name('roles.fetch-data');
     });
+
+    // Route custommer
+    Route::resource('personnel', PersonnelController::class);
+
+
+    // Route Oder
+    Route::resource('oder', OderController::class);
 });

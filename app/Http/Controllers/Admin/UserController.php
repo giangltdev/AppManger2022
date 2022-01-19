@@ -101,6 +101,9 @@ class UserController extends Controller
         $user['images'] = $request->images;
         $user['email'] = $request->email;
         $user['phone'] = $request->phone;
+        $user['department'] = $request->department;
+        $user['rank'] = $request->rank;
+        $user['team'] = $request->team;
         $user['is_active'] = ($request->is_active);
         $user->syncRoles($request->role);
         $permissions = Permission::all();
@@ -163,5 +166,70 @@ class UserController extends Controller
         else {
             return redirect()->back()->with('error', 'Xoá tài khoản không thành công!');
         }
+    }
+
+    public function change_pass(User $user)
+    {
+        return view('admin.user.change', compact('user'));
+    }
+
+    public function update_pass(Request $request, User $user)
+    {
+        $user['password'] = bcrypt($request->password);
+        $user->save();
+        // Return page redirection and successful message submission with Sweetaleart
+        return redirect()->back()->with('message', 'Đã đổi mật khẩu thành công!');
+    }
+
+    public function user_info(User $user)
+    {
+        return view('admin.user.info', compact('user'));
+    }
+
+    public function update_info(Request $request, User $user)
+    {
+        // dd($request->all());
+        $user['first_name'] = $request->first_name;
+        $user['last_name'] = $request->last_name;
+        $user['gender'] = $request->gender;
+        $user['birthday'] = $request->birthday;
+        $user['address'] = $request->address;
+        $user['name'] = $request->name;
+        $user['images'] = $request->images;
+        $user['email'] = $request->email;
+        $user['phone'] = $request->phone;
+        /* Image processing */
+        // Create a variable to get the file through the request
+        $get_image = $request->file('images');
+        // Create a variable that checks if the file exists
+        $has_file = $request->hasFile('images');
+        //If a file is found and an existing file returns true, then add the file
+        if ($get_image && $has_file == true) {
+            // Get the file name
+            $get_image_name = $get_image->getClientOriginalName();
+            // Convert files use uniqid to generate a random string and concatenate names with spaces and underscores
+            $new_images = uniqid() . '_' . str_replace(' ', '_', $get_image_name);
+            // Push the file to the path of the converted name
+            $get_image->move('images/posts', $new_images);
+            // Assigns the converted name to the array
+            $user['images'] = $new_images;
+
+            // Get all value
+            $user->fillable($request->all());
+
+            // Save value to database
+            $user->save();
+
+            // Return page redirection and successful message submission with Sweetaleart
+            return redirect()->back()->with('message', 'Đã cập nhật thông tin thành công!');
+        }
+        // If the image is empty, continue to upload
+        $user['images'] = "";
+        // Get all value
+        $user->fillable($request->all());
+        // Save value to database
+        $user->save();
+        // Return page redirection and successful message submission with Sweetaleart
+        return redirect()->back()->with('message', 'Đã cập nhật thông tin thành công!');
     }
 }

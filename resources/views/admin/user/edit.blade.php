@@ -248,7 +248,70 @@
                     </div>
 
                     <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Phòng ban</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <div class="input-group input-group-lg input-group-solid">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="la la-user"></i>
+                                    </span>
+                                </div>
+                                <select name="department" class="form-control" id="exampleSelectd">
+                                    <option selected>{{$user->department}}</option>
+                                    <option value="Lãnh đạo">Lãnh đạo</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Sale">Sale</option>
+                                    <option value="Hành chính nhân sự">Hành chính nhân sự</option>
+                                    <option value="Kế toán">Kế toán</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label">Chức vụ</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <div class="input-group input-group-lg input-group-solid">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="la la-user"></i>
+                                    </span>
+                                </div>
+                                <select name="rank" class="form-control" id="exampleSelectd">
+                                    <option selected>{{$user->rank}}</option>
+                                    <option value="Giám đốc">Giám đốc</option>
+                                    <option value="Trưởng phòng">Trưởng phòng</option>
+                                    <option value="Phó phòng">Phó phòng</option>
+                                    <option value="Nhân viên">Nhân viên</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Nhóm</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <div class="input-group input-group-lg input-group-solid">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="la la-user"></i>
+                                    </span>
+                                </div>
+                                <select name="team" class="form-control" id="exampleSelectd">
+                                    <option selected>{{$user->team}}</option>
+                                    <option value="Macsara">Macsara</option>
+                                    <option value="Apo">Apo</option>
+                                    <option value="PLuxshine">Luxshine</option>
+                                    <option value="Design">Design</option>
+                                    <option value="Seo">Seo</option>
+                                    <option value="Content">Content</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Quyền truy cập</label>
                         <div class="col-lg-9 col-xl-6">
                             <div class="input-group input-group-lg input-group-solid">
                                 <div class="input-group-prepend">
