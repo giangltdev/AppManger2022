@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class Admincontroller extends Controller
 {
@@ -12,3 +14,4 @@ class Admincontroller extends Controller
         return view('admin.dashboard.index');
     }
 }
+

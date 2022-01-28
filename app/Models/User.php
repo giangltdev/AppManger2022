@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\ResetPasswordNotification;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +32,9 @@ class User extends Authenticatable
         'address',
         'phone',
         'is_active',
+        'department',
+        'rank',
+        'team'
     ];
 
     /**
@@ -49,4 +55,33 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     // SEARCH FUNCTIONS
+     public function scopeSearch($query, ...$colums)
+     {
+         $keyWord = request()->search;
+         foreach ($colums as $colum) {
+             $query->orWhere($colum, 'like', "%$keyWord%");
+         }
+     }
+
+     public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function getOder()
+    {
+        return $this->hasMany('App\Models\Oder', 'user_id');
+    }
+
+    public function getWork()
+    {
+        return $this->hasMany('App\Models\Oder', 'pic_id');
+    }
+
+    public function getSocial()
+    {
+        return $this->hasMany('App\Models\Oder', 'pic_social_id');
+    }
 }
