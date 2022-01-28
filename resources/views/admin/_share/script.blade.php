@@ -107,32 +107,3 @@
         toastr.warning("{{ session('warning') }}");
     @endif
 </script>
-
-
-<script type="text/javascript">
-    $('#keywords').keyup(function() {
-        const query = $(this).val();
-        // alert(wuery);
-        if (query != '') {
-            const _token = $('input[name="_token"]').val();
-            $.ajax({
-                url: "{{ url('admin/autocomplete') }}",
-                method: "POST",
-                data: {
-                    query: query,
-                    _token: _token
-                },
-                success: function(data) {
-                    $('#search_ajax').fadeIn();
-                    $('#search_ajax').html(data);
-                }
-            });
-        } else {
-            $('#search_ajax').fadeOut();
-        }
-    });
-    $(document).on('click', 'li', function() {
-        $('#keywords').val($(this).text());
-        $('#search_ajax').fadeOut();
-    });
-</script>

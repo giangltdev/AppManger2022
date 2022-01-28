@@ -38,6 +38,7 @@
             data-menu-dropdown-timeout="500">
             <!--begin::Menu Nav-->
             <ul class="menu-nav">
+
                 <li class="menu-item @yield('active_home')" aria-haspopup="true">
                     <a href="{{ route('admin') }}" class="menu-link">
                         <span class="svg-icon menu-icon">
@@ -89,12 +90,25 @@
                     <div class="menu-submenu">
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
+                            @role('SupperAdmin|Admin')
+                                @if (Auth::user()->department == 'Marketing' && Auth::user()->team == 'Manager' || Auth::user()->department == 'Marketing' && Auth::user()->team == 'IT')
+                                    <li class="menu-item" aria-haspopup="true">
+                                        <a href="{{ route('oder.index') }}" class="menu-link">
+                                            <i class="menu-bullet menu-bullet-line">
+                                                <span></span>
+                                            </i>
+                                            <span class="menu-text">Quản lý thiết kế</span>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endrole
+                            @if (Auth::user()->team == 'Manager' || Auth::user()->team == 'Staff' || Auth::user()->team == 'Content' || Auth::user()->team == 'Seo' || Auth::user()->team == 'Luxshine' || Auth::user()->team == 'Apo' || Auth::user()->team == 'Macsara' || Auth::user()->team == 'IT')
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ route('oder.index') }}" class="menu-link">
+                                <a href="{{ route('oder.view') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-line">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Quản lý thiết kế</span>
+                                    <span class="menu-text">Thông tin thiết kế</span>
                                 </a>
                             </li>
                             <li class="menu-item" aria-haspopup="true">
@@ -105,11 +119,23 @@
                                     <span class="menu-text">Thêm yêu cầu</span>
                                 </a>
                             </li>
+                            @endif
+                            @if (Auth::user()->team == 'Design' || Auth::user()->team == 'Content')
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{route('oder.work')}}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-line">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Công việc</span>
+                                </a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                 </li>
 
                 <!--begin:: End Order-->
+                @if (Auth::user()->team == 'Staff' || Auth::user()->team == 'IT')
                 <li class="menu-item menu-item-submenu @yield('active_personnel')" aria-haspopup="true"
                     data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
@@ -156,7 +182,8 @@
                         </ul>
                     </div>
                 </li>
-
+                @endif
+                @role('SupperAdmin')
                 <li class="menu-item menu-item-submenu @yield('active_user')" aria-haspopup="true"
                     data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
@@ -265,6 +292,7 @@
                         </ul>
                     </div>
                 </li>
+                @endrole
             </ul>
             <!--end::Menu Nav-->
         </div>

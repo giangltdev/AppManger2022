@@ -11,7 +11,7 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:Admin', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('role:SupperAdmin', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     public function index()

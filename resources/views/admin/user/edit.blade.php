@@ -300,10 +300,13 @@
                                     <option selected>{{$user->team}}</option>
                                     <option value="Macsara">Macsara</option>
                                     <option value="Apo">Apo</option>
-                                    <option value="PLuxshine">Luxshine</option>
+                                    <option value="Luxshine">Luxshine</option>
                                     <option value="Design">Design</option>
                                     <option value="Seo">Seo</option>
                                     <option value="Content">Content</option>
+                                    <option value="Manager">Manager</option>
+                                    <option value="Staff">Staff</option>
+                                    <option value="IT">IT</option>
                                 </select>
                             </div>
                         </div>

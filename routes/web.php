@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\Admincontroller;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PersonnelController;
 use App\Http\Controllers\Admin\OderController;
@@ -27,7 +28,7 @@ Auth::routes(['verify' => true]);
 
 
 Route::middleware('activeLoginUser')->prefix('admin')->group(function () {
-    Route::get('', [App\Http\Controllers\Admin\Admincontroller::class, 'index'])->name('admin');
+    Route::get('', [Admincontroller::class, 'index'])->name('admin');
     // Route User
     Route::resource('user', UserController::class);
     Route::get('user/{user}/change_pass', [UserController::class, 'change_pass'])->name('user.change_pass');
@@ -56,4 +57,9 @@ Route::middleware('activeLoginUser')->prefix('admin')->group(function () {
 
     // Route Oder
     Route::resource('oder', OderController::class);
+    Route::get('thong-tin-thiet-ke', [OderController::class, 'oder_view'])->name('oder.view');
+    Route::get('cong-viec-thiet-ke',[OderController::class, 'oder_work'])->name('oder.work');
+    Route::get('Bao-cao-du-lieu-thiet-ke', [OderController::class, 'oder_analytic'])->name('oder.analytic');
+    Route::get('export',[OderController::class, 'export'])->name('oder.export');
+
 });

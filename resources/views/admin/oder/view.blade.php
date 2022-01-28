@@ -1,7 +1,7 @@
 @extends('admin.master')
-@section('title', 'Quản lý thiết kế')
+@section('title', 'Thông tin thiết kế')
 @section('active_design', 'menu-item-active')
-@section('name_page', 'Trang quản lý yêu cầu thiết kế')
+@section('name_page', 'Trang quản lý thông tin thiết kế cá nhân')
 
 @section('main')
     <!--begin::Notice-->
@@ -24,7 +24,7 @@
                 <!--end::Svg Icon-->
             </span>
         </div>
-        <div class="alert-text">Có thể xuất file, chỉnh sửa thông tin, xóa và cập nhật yêu cầu thiết kế.
+        <div class="alert-text">Có thể thêm, chỉnh sửa thông tin, xóa và cập nhật yêu cầu thiết kế.
         </div>
     </div>
     <!--end::Notice-->
@@ -48,27 +48,23 @@
                         </span>
                     </div>
                 </form>
-                <div class="form-group form_submit mb-0">
-
-                    <button id="btnViewReport" type="button" class="btn btn-primary " disabled="" onclick="gotoReport()">
+                <!--begin::Button-->
+                <a href="{{ route('oder.create') }}" class="btn btn-primary font-weight-bolder">
+                    <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                        <span class="svg-icon svg-icon-dark svg-icon-2x">
-                            <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Binocular.svg--><svg
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <rect x="0" y="0" width="24" height="24" />
-                                    <path
-                                        d="M12.8434797,16 L11.1565203,16 L10.9852159,16.6393167 C10.3352654,19.064965 7.84199997,20.5044524 5.41635172,19.8545019 C2.99070348,19.2045514 1.55121603,16.711286 2.20116652,14.2856378 L3.92086709,7.86762789 C4.57081758,5.44197964 7.06408298,4.00249219 9.48973122,4.65244268 C10.5421727,4.93444352 11.4089671,5.56345262 12,6.38338695 C12.5910329,5.56345262 13.4578273,4.93444352 14.5102688,4.65244268 C16.935917,4.00249219 19.4291824,5.44197964 20.0791329,7.86762789 L21.7988335,14.2856378 C22.448784,16.711286 21.0092965,19.2045514 18.5836483,19.8545019 C16.158,20.5044524 13.6647346,19.064965 13.0147841,16.6393167 L12.8434797,16 Z M17.4563502,18.1051865 C18.9630797,18.1051865 20.1845253,16.8377967 20.1845253,15.2743923 C20.1845253,13.7109878 18.9630797,12.4435981 17.4563502,12.4435981 C15.9496207,12.4435981 14.7281751,13.7109878 14.7281751,15.2743923 C14.7281751,16.8377967 15.9496207,18.1051865 17.4563502,18.1051865 Z M6.54364977,18.1051865 C8.05037928,18.1051865 9.27182488,16.8377967 9.27182488,15.2743923 C9.27182488,13.7109878 8.05037928,12.4435981 6.54364977,12.4435981 C5.03692026,12.4435981 3.81547465,13.7109878 3.81547465,15.2743923 C3.81547465,16.8377967 5.03692026,18.1051865 6.54364977,18.1051865 Z"
-                                        fill="#000000" />
-                                </g>
-                            </svg>
-                            <!--end::Svg Icon-->
-                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                            height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"></rect>
+                                <circle fill="#000000" cx="9" cy="15" r="6"></circle>
+                                <path
+                                    d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                    fill="#000000" opacity="0.3"></path>
+                            </g>
+                        </svg>
                         <!--end::Svg Icon-->
-                        Xem báo cáo
-                    </button>
-                </div>
+                    </span>Thêm mới</a>
+                <!--end::Button-->
             </div>
         </div>
     </div>
@@ -76,9 +72,6 @@
     <table class="table" style="background-color: #fff">
         <thead>
             <tr class="table-head">
-                <th scope="col">
-                    <input id="select-all" type="checkbox" class="mr-1">
-                </th>
                 <th scope="col" class="text-center">Thể loại</th>
                 <th scope="col" class="text-center">Ngày đặt</th>
                 <th scope="col" class="text-center">Thời hạn</th>
@@ -95,9 +88,6 @@
         <tbody>
             @foreach ($oders as $key => $oder)
                 <tr>
-                    <td>
-                        <input id="viewCheck" value="{{ @$oder['id'] }}" type="checkbox" class="mr-1">
-                    </td>
                     <td class="text-center">{{ $oder->category }}</td>
                     <td class="text-center">{{ date('d-m-Y', strtotime($oder->start_date)) }}</td>
                     <td class="text-center">{{ date('d-m-Y', strtotime($oder->end_date)) }}</td>
@@ -134,13 +124,13 @@
                     @endif
 
                     @if ($oder->status_social == 1)
-                        <td class="text-center text-success">
-                            Đã cập nhật
-                        </td>
+                    <td class="text-center text-success">
+                       Đã cập nhật
+                    </td>
                     @else
-                        <td class="text-center text-danger">
-                            Chưa cập nhật
-                        </td>
+                    <td class="text-center text-danger">
+                        Chưa cập nhật
+                     </td>
                     @endif
 
                     <td class="text-center">
@@ -197,43 +187,6 @@
 
 
 @section('script')
-    <script>
-        $(function() {
-            $('input[type=checkbox]').on('change', function(e) {
-                let totalChecked = $('input[type=checkbox]:checked').length;
-
-                if (totalChecked === 0) {
-                    $('#btnViewReport').attr('disabled', 'disabled')
-                } else {
-                    $('#btnViewReport').removeAttr('disabled')
-                }
-            });
-        });
-
-        function gotoReport() {
-            let viewContent = document.getElementById('viewCheck').value;
-            console.log('viewContent: ', viewContent);
-            let ids = [];
-            let viewchecks = $('#viewCheck[type=checkbox]:checked').each(function(e) {
-                ids.push($(this).val())
-            });
-            window.location.href = '{{ route('oder.analytic') }}?ids=' + ids.join(',');
-
-        }
-    </script>
-
-    <script>
-        $('#select-all').click(function(event) {
-            if (this.checked) {
-                // Iterate each checkbox
-                $(':checkbox').each(function() {
-                    this.checked = true;
-                });
-            } else {
-                $(':checkbox').each(function() {
-                    this.checked = false;
-                });
-            }
-        });
-    </script>
+    <!-- Sweetalert JS default delete-->
+    <script src="{{ asset('js/sweetalert.js') }}"></script>
 @endsection
